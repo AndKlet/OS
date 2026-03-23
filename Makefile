@@ -1,4 +1,4 @@
-ASM nasm
+ASM=nasm
 
 SRC_DIR=src
 BUILD_DIR=build
