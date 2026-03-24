@@ -1,8 +1,10 @@
 org  0x7C00
 bits 16
 
-main:
+start:
+    jmp main
 
+main:
     ; setup segment registers
     mov ax, 0
     mov ds, ax
@@ -10,9 +12,7 @@ main:
 
     ; stack
     mov ss, ax
-    mov sp, 0x7C00
 
-    bit
 
 .halt
     jmp .halt
