@@ -16,6 +16,8 @@ main:
     mov ss, ax
     mov sp, 0x7C00 ; We set the stack pointer to the end of the bootloader, since it grows downwards
 
+    mov si, msg_welcome
+    call puts
 ;
 ; Prints string
 ; Parameters:
@@ -42,6 +44,8 @@ puts:
 
 .halt
     jmp .halt
+
+msg_welcome db 'Welcome to AndOS!' , ENDLINE, 0
 
 times 510-($-$$) db 0
 dw 0xAA55
