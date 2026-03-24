@@ -18,7 +18,7 @@ main:
 
     mov si, msg_welcome
     call puts
-    jmp .halt
+    jmp halt
 ;
 ; Prints string
 ; Parameters:
@@ -42,8 +42,8 @@ puts:
     pop si
     ret
 
-.halt
-    jmp .halt
+halt:
+    jmp halt
 
 msg_welcome db 'Welcome to MyOS!' , ENDLINE, 0
 
