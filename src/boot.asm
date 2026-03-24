@@ -24,8 +24,8 @@ main:
 ;   - si: pointer to the string to print
 ;   - ds: segment of the string
 puts:
-    push si
-    push ax
+    push si ; save si on the stack
+    push ax ; save ax on the stack
 
 .loop:
     lodsb              ; load next character
