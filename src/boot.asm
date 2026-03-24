@@ -18,6 +18,7 @@ main:
 
     mov si, msg_welcome
     call puts
+    jmp .halt
 ;
 ; Prints string
 ; Parameters:
