@@ -1,6 +1,8 @@
 org  0x7C00
 bits 16
 
+%define ENDLINE 0x0D, 0x0A
+
 start:
     jmp main
 
@@ -27,7 +29,7 @@ puts:
     lodsb              ; load next character
     or al, al          ; check if it's null terminator
     jz .done
-    
+
     mov ah, 0x0E       ; BIOS teletype function
     int 0x10           ; print character
     jmp .loop
