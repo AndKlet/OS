@@ -12,7 +12,7 @@ main:
 
     ; stack
     mov ss, ax
-
+    mov sp, 0x7C00 ; We set the stack pointer to the end of the bootloader, since it grows downwards
 
 .halt
     jmp .halt
