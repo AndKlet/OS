@@ -45,7 +45,7 @@ puts:
 .halt
     jmp .halt
 
-msg_welcome db 'Welcome to AndOS!' , ENDLINE, 0
+msg_welcome db 'Welcome to MyOS!' , ENDLINE, 0
 
 times 510-($-$$) db 0
 dw 0xAA55
