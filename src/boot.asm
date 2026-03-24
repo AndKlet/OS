@@ -41,7 +41,6 @@ puts:
     pop si
     ret
 
-
 .halt
     jmp .halt
 
