@@ -1,11 +1,14 @@
-ASM=nasm
+x86_64_asm_source_files := $(shell find src/impl/x86_64 -name *.asm)
+x86_64_asm_object_files := $(patsubst src/impl/x86_64/%.asm, build/x86_64/%.o, $(x86_64_asm_source_files))
 
-SRC_DIR=src
-BUILD_DIR=build
+$(x86_64_asm_object_files): build/x86_64/%.o : src/impl/x86_64/%asm
+	mkdir -p $(dir $@) && \
+	nasm -f elf64 $(patsubst build/x86_64/%.o, src/impl/x86_64/%.asm, $@) -o $@
 
-$(BUILD_DIR)/main_floppy.img: $(BUILD_DIR)/boot.bin
-	cp $(BUILD_DIR)/boot.bin $(BUILD_DIR)/main_floppy.img
-	truncate -s 1440k $(BUILD_DIR)/main_floppy.img
 
-$(BUILD_DIR)/boot.bin: $(SRC_DIR)/boot.asm
-	$(ASM) $(SRC_DIR)/boot.asm -f bin -o $(BUILD_DIR)/boot.bin
+.PHONY: build-x86_64
+build-x86_64: $(x86_64_asm_object_files)
+	mkdir -p dist/x86_64 && .
+	x86_64-elf-ld -n -o dist/x86_64/kernel.bin -T targets/x86_64/linker.ld $(x86_64_asm_object_files) && \
+	cp dist/x86_64/kernel.bin targets/x86_64/iso/boot/kernel.bin && \
+	grub-mkrescue /usr/lib/grub/i386-pc -o dist/x86_64/kernel.iso targets/x86_64/iso
